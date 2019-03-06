@@ -36,9 +36,11 @@ for i in range(epochs):
 	print('epoch:', i, 'loss:', loss.item())
 	losses.append(loss)
 
-	optimizer.zero_grad() #the optimizer zeroes out the grads of any tensors it is optimizing
-	loss.backward() #the model parameters (which are tensors) store their gradient
-	optimizer.step() #the optimizer goes through each tensor it should be optimizing, and steps each one in the -ve direction of its stored gradient
+	# https://stackoverflow.com/questions/53975717/pytorch-connection-between-loss-backward-and-optimizer-step
+	
+	optimizer.zero_grad() 	#the optimizer zeroes out the grads of any tensors it is optimizing
+	loss.backward() 		#computes the gradients for all tensors that have required_grad=True and were used in the calculation. The model parameters (which are tensors) then store their gradient
+	optimizer.step() 		#the optimizer goes through each tensor it should be optimizing, and steps each one in the -ve direction of its stored gradient
 
 
 
