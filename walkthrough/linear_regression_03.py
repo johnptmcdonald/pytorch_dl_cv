@@ -37,7 +37,9 @@ for i in range(epochs):
 	losses.append(loss)
 
 	# https://stackoverflow.com/questions/53975717/pytorch-connection-between-loss-backward-and-optimizer-step
-	
+	# When you call loss.backward(), all it does is compute gradient of loss w.r.t all the parameters in loss that have requires_grad = True and store them in parameter.grad attribute for every parameter.
+	# optimizer.step() updates all the parameters based on parameter.grad
+
 	optimizer.zero_grad() 	#the optimizer zeroes out the grads of any tensors it is optimizing
 	loss.backward() 		#computes the gradients for all tensors that have required_grad=True and were used in the calculation. The model parameters (which are tensors) then store their gradient
 	optimizer.step() 		#the optimizer goes through each tensor it should be optimizing, and steps each one in the -ve direction of its stored gradient
